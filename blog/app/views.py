@@ -24,3 +24,14 @@ class UserView(restful.Resource):
         db.session.add(user)
         db.session.commit()
         return UserSerializer(user).data
+
+class SessionView(restful.Resource):
+    def post(self):
+        form = SessionCreateForm()
+        if not form.validate_on_submit():
+            return form.errors, 422
+ 
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and flask_bcrypt.check_password_hash(user.password, form.password.data):
+            return UserSerializer(user).data, 201
+        return '', 401
