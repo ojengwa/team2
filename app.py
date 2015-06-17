@@ -33,5 +33,11 @@ comments = [
 def index():
     return jsonify({'posts':blog_posts})
 
+@app.route('/post/<post_id>', methods=['GET'])
+def get_post(post_id):
+    """Read Post by Id"""
+    id = int(post_id)
+    return jsonify({'post':posts[id], 'comments':comments})
+
 if __name__ == '__main__':
     app.run(debug=True)
