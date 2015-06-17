@@ -29,5 +29,9 @@ comments = [
                 }
             ]
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({'posts':blog_posts})
+
 if __name__ == '__main__':
     app.run(debug=True)
