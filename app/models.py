@@ -1,53 +1,33 @@
-from app import db
-from hashlib import md5
+from flask import g
 
+from wtforms.validators import Email
+
+from server import db, flask_bcrypt
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
-    about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime)
-    
-    def is_authenticated(self):
-        return True
+    email = db.Column(db.String(120), unique=True, nullable=False, info={'validators': Email()})
+    password = db.Column(db.String(80), nullable=False)
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
 
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        try:
-            return unicode(self.id)  # for python version 2
-        except NameError:
-            return str(self.id)  # for python 3
+    def __init__(self, email, password):
+        self.email = email
+        self.password = flask_bcrypt.generate_password_hash(password)
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
-    
-    def avatar(self, size):
-        return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
-    
-    @staticmethod
-    def make_unique_nickname(nickname):
-        if User.query.filter_by(nickname=nickname).first() is None:
-            return nickname
-        version = 2
-        while True:
-            new_nickname = nickname + str(version)
-            if User.query.filter_by(nickname=new_nickname).first() is None:
-                break
-            version += 1
-        return new_nickname
+        return '<User %r>' % self.email
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    body = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_at = db.Column(db.DateTime, default=db.func.now())
+
+    def __init__(self, title, body):
+        self.title = title
+        self.body = body
+        self.user_id = g.user.id
 
     def __repr__(self):
-        return '<Post %r>' % (self.body)
+        return '<Post %r>' % self.title
