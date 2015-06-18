@@ -121,3 +121,20 @@ class SessionView(restful.Resource):
         if user and check_password_hash(user.password, form.password.data):
             return UserSerializer(user).data, 201
         return '', 401
+
+
+class PostListView(restful.Resource):
+    def get(self):
+        posts = Post.query.all()
+        return PostSerializer(posts, many=True).data
+
+    @auth.login_required
+    def post(self):
+        form = PostCreateForm()
+        if not form.validate_on_submit():
+            return form.errors, 422
+        post = Post(form.title.data, form.body.data)
+        db.session.add(post)
+        db.session.commit()
+        return PostSerializer(post).data, 201
+
