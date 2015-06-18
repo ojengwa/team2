@@ -1,13 +1,24 @@
-from app import app
-
 import unittest
+from flask_app import app
+from coverage import coverage
+
+cov = coverage(branch=True, omit=['flask/*', 'tests.py'])
+cov.start()
+
 
 class BasicTestCase(unittest.TestCase):
+    """Tests to be carried out for the following api calls
+        0: '/api/v1/users'
+        1: '/api/v1/sessions'
+        2: '/api/v1/posts'
+        3: '/api/v1/posts/<int:id>'
+    """
+
 
     def test_index(self):
         """initial test. ensure flask was set up correctly"""
         tester = app.test_client(self)
-        response = tester.get('/', content_type='application/json')
+        response = tester.get('/api/v1/', content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, "{msg:'Hello, World!'}")
     
