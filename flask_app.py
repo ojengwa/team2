@@ -61,4 +61,17 @@ class ModelForm(BaseModelForm):
         return db.session
 
 
+class UserCreateForm(ModelForm):
+    class Meta:
+        model = User
+
+
+class SessionCreateForm(Form):
+    email = StringField('email', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired()])
+
+
+class PostCreateForm(ModelForm):
+    class Meta:
+        model = Post
 
