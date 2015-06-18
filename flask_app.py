@@ -54,19 +54,21 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post %r>' % self.title
 
-db.create_all()
 
+db.create_all()
 # Forms
 BaseModelForm = model_form_factory(Form)
 
 
 class ModelForm(BaseModelForm):
+    
     @classmethod
     def get_session(cls):
         return db.session
 
 
 class UserCreateForm(ModelForm):
+    
     class Meta:
         model = User
 
@@ -77,18 +79,20 @@ class SessionCreateForm(Form):
 
 
 class PostCreateForm(ModelForm):
+    
     class Meta:
         model = Post
 
 
 class UserSerializer(Serializer):
+    
     class Meta:
         fields = ("id", "email")
 
 
 class PostSerializer(Serializer):
     user = fields.Nested(UserSerializer)
-
+    
     class Meta:
         fields = ("id", "title", "body", "user", "created_at")
 
@@ -103,6 +107,7 @@ def verify_password(email, password):
 
 
 class UserView(restful.Resource):
+
     def post(self):
         form = UserCreateForm()
         if not form.validate_on_submit():
@@ -115,6 +120,7 @@ class UserView(restful.Resource):
 
 
 class SessionView(restful.Resource):
+
     def post(self):
         form = SessionCreateForm()
         if not form.validate_on_submit():
@@ -127,7 +133,9 @@ class SessionView(restful.Resource):
 
 
 class PostListView(restful.Resource):
+    """Over rest we all only get request for to retrieve all posts"""
     def get(self):
+        """Retrieve all posts and return as json object"""
         posts = Post.query.all()
         return PostSerializer(posts, many=True).data
 
