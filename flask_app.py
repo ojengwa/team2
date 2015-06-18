@@ -138,3 +138,7 @@ class PostListView(restful.Resource):
         db.session.commit()
         return PostSerializer(post).data, 201
 
+class PostView(restful.Resource):
+    def get(self, id):
+        posts = Post.query.filter_by(id=id).first()
+        return PostSerializer(posts).data
