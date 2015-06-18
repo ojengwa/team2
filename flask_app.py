@@ -7,6 +7,7 @@ from wtforms_alchemy import model_form_factory
 from werkzeug import generate_password_hash, check_password_hash
 from wtforms import StringField
 from wtforms.validators import DataRequired
+from marshmallow import Serializer, fields
 
 
 app = Flask(__name__)
@@ -75,3 +76,14 @@ class PostCreateForm(ModelForm):
     class Meta:
         model = Post
 
+# Serializers to return properly formatted database fields 
+class UserSerializer(Serializer):
+    class Meta:
+        fields = ("id", "email")
+
+
+class PostSerializer(Serializer):
+    user = fields.Nested(UserSerializer)
+
+    class Meta:
+        fields = ("id", "title", "body", "user", "created_at")
