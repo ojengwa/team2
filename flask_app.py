@@ -1,15 +1,17 @@
+# A very simple Flask Hello World app for you to get started with...
 import os
 from flask import Flask, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.httpauth import HTTPBasicAuth
+from flask.ext import restful
+#from flask.ext.restful import reqparse, Api
 from flask.ext.wtf import Form
-from wtforms_alchemy import model_form_factory
+from marshmallow import Serializer, fields
+from wtforms.validators import Email
 from werkzeug import generate_password_hash, check_password_hash
+from wtforms_alchemy import model_form_factory
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from marshmallow import Serializer, fields
-from flask.ext import restful
-
 
 app = Flask(__name__)
 basedir = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +22,10 @@ app.config['WTF_CSRF_ENABLED'] = False
 db = SQLAlchemy(app)
 
 auth = HTTPBasicAuth()
+
+# flask-restful
+api = restful.Api(app)
+
 
 # Models
 class User(db.Model):
@@ -34,6 +40,7 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.email
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -52,12 +59,11 @@ class Post(db.Model):
 
 db.create_all()
 
-# All forms to inherit from the WTF Form class
+# Forms
 BaseModelForm = model_form_factory(Form)
 
 
 class ModelForm(BaseModelForm):
-    """We use this to bind all forms to our database"""
     @classmethod
     def get_session(cls):
         return db.session
@@ -77,7 +83,7 @@ class PostCreateForm(ModelForm):
     class Meta:
         model = Post
 
-# Serializers to return properly formatted database fields 
+
 class UserSerializer(Serializer):
     class Meta:
         fields = ("id", "email")
@@ -89,7 +95,7 @@ class PostSerializer(Serializer):
     class Meta:
         fields = ("id", "title", "body", "user", "created_at")
 
-#Views
+# Views
 @auth.verify_password
 def verify_password(email, password):
     user = User.query.filter_by(email=email).first()
@@ -143,7 +149,6 @@ class PostView(restful.Resource):
     def get(self, id):
         posts = Post.query.filter_by(id=id).first()
         return PostSerializer(posts).data
-
 
 # Add resource to api
 api.add_resource(UserView, '/api/v1/users')
