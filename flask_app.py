@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
 basedir = os.path.dirname(os.path.abspath(__file__))
@@ -9,3 +10,5 @@ app.debug = True
 app.config['WTF_CSRF_ENABLED'] = False
 
 db = SQLAlchemy(app)
+
+auth = HTTPBasicAuth()
