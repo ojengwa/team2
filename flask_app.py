@@ -2,6 +2,8 @@ import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.httpauth import HTTPBasicAuth
+from flask.ext.wtf import Form
+from wtforms_alchemy import model_form_factory
 from werkzeug import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -44,3 +46,6 @@ class Post(db.Model):
         return '<Post %r>' % self.title
 
 db.create_all()
+
+# All forms to inherit from the WTF Form class
+BaseModelForm = model_form_factory(Form)
