@@ -49,3 +49,9 @@ db.create_all()
 
 # All forms to inherit from the WTF Form class
 BaseModelForm = model_form_factory(Form)
+
+class ModelForm(BaseModelForm):
+    @classmethod
+    def get_session(cls):
+        return db.session
+
