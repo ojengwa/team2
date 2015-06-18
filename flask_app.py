@@ -18,16 +18,13 @@ basedir = os.path.dirname(os.path.abspath(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % os.path.join(basedir, 'blog.sqlite')
 app.debug = True
 app.config['WTF_CSRF_ENABLED'] = False
-
 db = SQLAlchemy(app)
-
 auth = HTTPBasicAuth()
-
 # flask-restful
 api = restful.Api(app)
 
 
-# Models
+# Declare Model blueprints used in creating users
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False, info={'validators': Email()})
