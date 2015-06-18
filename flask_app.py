@@ -8,6 +8,7 @@ from werkzeug import generate_password_hash, check_password_hash
 from wtforms import StringField
 from wtforms.validators import DataRequired
 from marshmallow import Serializer, fields
+from flask.ext import restful
 
 
 app = Flask(__name__)
