@@ -5,6 +5,9 @@ from flask.ext.httpauth import HTTPBasicAuth
 from flask.ext.wtf import Form
 from wtforms_alchemy import model_form_factory
 from werkzeug import generate_password_hash, check_password_hash
+from wtforms import StringField
+from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
 basedir = os.path.dirname(os.path.abspath(__file__))
@@ -50,8 +53,12 @@ db.create_all()
 # All forms to inherit from the WTF Form class
 BaseModelForm = model_form_factory(Form)
 
+
 class ModelForm(BaseModelForm):
+    """We use this to bind all forms to our database"""
     @classmethod
     def get_session(cls):
         return db.session
+
+
 
