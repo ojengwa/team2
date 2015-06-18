@@ -12,11 +12,11 @@ basedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../')
 app = Flask(__name__)
 app.config.from_object('app.config')
 
-# flask-sqlalchemy
+#for handling database call via flask-sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 db = SQLAlchemy(app)
 
-# flask-restful
+#for calling the API engine through flask-restful
 api = restful.Api(app)
 
 # flask-bcrypt
