@@ -16,7 +16,7 @@
           <div class="nav-bar right">
             <a class='button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
             <a class='button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
-            <a class='button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+            <a style="display:none" class='create-post button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
           </div>
           <h1>Blogg <small>This is my mini andela blog</small></h1>
           <hr/>
@@ -25,12 +25,8 @@
        
      
       <div class="row">
-        <div class="large-9 columns" role="content">
-          <article>
-            <h3><a href="#">Blog Post Title</a></h3>
-            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-          </article>     
-          <hr/>          
+        <div id="blog-entries" class="large-9 columns" role="content">
+                  
         </div>
       </div>
      
@@ -44,7 +40,7 @@
             <div class="large-6 columns">
                 <a class='button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
                 <a class='button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
-                <a class='button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+                <a style="display:none" class='create-post button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
             </div>
           </div>
         </div>
@@ -58,22 +54,22 @@
                 <div class="row">
                   <div class="large-12 columns">
                     <label >Email:
-                      <input  type="text" placeholder="your email goes here"  />
+                      <input id="signup-email" type="text" placeholder="your email goes here" required />
                     </label>
                     
                   </div>
                 </div>
                 <div class="row">
                   <div class="large-12 columns">
-                    <label >Password:
-                      <input  type="password" placeholder="your password goes here"  />
+                    <label>Password:
+                      <input id="signup-pwd" type="password" placeholder="your password goes here" required />
                     </label>
                     
                   </div>
                 </div>
                 <div class="row">
                   <div class="large-6 columns">
-                    <input type='submit' class='button' value='Submit' />
+                    <input id="signup-btn" type='submit' class='button' value='Submit' />
                   </div>
                 </div>
             </form>
@@ -86,7 +82,7 @@
                 <div class="row">
                   <div class="large-12 columns">
                     <label >Email:
-                      <input  type="text" placeholder="your email goes here"  />
+                      <input id="signin-email" type="text" placeholder="your email goes here" required />
                     </label>
                     
                   </div>
@@ -94,14 +90,14 @@
                 <div class="row">
                   <div class="large-12 columns">
                     <label >Password:
-                      <input  type="password" placeholder="your password goes here" />
+                      <input id="signin-pwd" type="password" placeholder="your password goes here" required />
                     </label>
                    
                   </div>
                 </div>
                 <div class="row">
                   <div class="large-6 columns">
-                    <input type='submit' class='button' value='Submit' />
+                    <input id="signin-btn" type='submit' class='button' value='Submit' />
                   </div>
                 </div>
             </form>
