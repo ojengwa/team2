@@ -1,6 +1,6 @@
 # A very simple Flask Hello World app for you to get started with...
 import os
-from flask import Flask, g
+from flask import Flask, g, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.httpauth import HTTPBasicAuth
 from flask.ext import restful
@@ -49,7 +49,7 @@ class Post(db.Model):
     def __init__(self, title, body):
         self.title = title
         self.body = body
-        self.user_id = g.user.id
+        self.user_id = request.form['id']
 
     def __repr__(self):
         return '<Post %r>' % self.title
