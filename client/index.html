@@ -1,90 +1,147 @@
-<!DOCTYPE html>
-<html ng-app="Blog" ng-controller="ApplicationCtrl">
-    <head>
-        <meta charset="utf-8" />
-        <title>Blog</title>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
 
-        <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="./css/theme.css">
-        <link rel="stylesheet" type="text/css" href="./css/styles.css">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- foundation framework links  -->
-        <link rel="stylesheet" href="css/foundation.css" />
-        <script src="js/vendor/modernizr.js"></script>
-    </head>
-    <body>
-        <div class="row">
-            <div class="large-12 columns">
-                <a class="left-off-canvas-toggle" href="#" >Menu</a>
-            
-                <!-- Off Canvas Menu -->
-                <aside class="left-off-canvas-menu">
-                    <!-- whatever you want goes here -->
-                    <ul>
-                      <li><a href="#">Item 1</a></li>
-                    ...
-                    </ul>
-                </aside>
-                
-                <ul class="button-group">
-                    <a class="blog-nav-item" href="#" ng-class="{active: isActive('/')}">Home</a>
-                    <a class="blog-nav-item" href="#/sessions/create" ng-hide="isLoggedIn" ng-class="{active: isActive('/sessions/create')}">Login</a>
-                    <a class="blog-nav-item" href="#/sessions/destroy" ng-show="isLoggedIn">Logout</a>
-                    <a class="blog-nav-item" href="#/users/create" ng-class="{active: isActive('/users/create')}">Register</a>
-                    <a class="blog-nav-item" href="#/posts/create" ng-show="isLoggedIn" ng-class="{active: isActive('/posts/create')}">Create a post</a>
-                </ul>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <div class="nav-bar right">
+            <a class='button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
+            <a class='button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
+            <a class='button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+          </div>
+          <h1>Blogg <small>This is my mini andela blog</small></h1>
+          <hr/>
+        </div>
+      </div>
+       
+     
+      <div class="row">
+        <div class="large-9 columns" role="content">
+          <article>
+            <h3><a href="#">Blog Post Title</a></h3>
+            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+          </article>     
+          <hr/>          
+        </div>
+      </div>
+     
+      <footer class="row">
+        <div class="large-12 columns">
+          <hr/>
+          <div class="row">
+            <div class="large-6 columns">
+              <p>Copyright no one at all. Go to town.</p>
             </div>
+            <div class="large-6 columns">
+                <a class='button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
+                <a class='button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
+                <a class='button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+        
+
+        <!-- Reveal Modal for signup form begin -->
+        <div id="signupModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form >
+                <h2>Sign Up</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Email:
+                      <input  type="text" placeholder="your email goes here"  />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Password:
+                      <input  type="password" placeholder="your password goes here"  />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
         </div>
         
-        <div class='row'>
-            <div class='large-12 columns'>
-                <div class="container main-view">
-        
-                    <div ng-view>
-                        <div class='fill_up'>
-                            
-                        </div>
-                    </div>
-        
-                </div><!-- /.container -->
-            </div>
+        <!-- Reveal Modal for signin form begin -->
+        <div id="signinModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form >
+                <h2>Sign In</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Email:
+                      <input  type="text" placeholder="your email goes here"  />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Password:
+                      <input  type="password" placeholder="your password goes here" />
+                    </label>
+                   
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
         </div>
-        <!-- close the off-canvas menu -->
-        <a class="exit-off-canvas"></a>
-        <footer class="row">
-            <div class="large-12 columns">
-                <div class="large-6 columns">
-                    <p>2015 Copyright Andela BootCamp.</p>
+        
+        <!-- Reveal Modal for signin form begin -->
+        <div id="createModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form>
+                <h2>Create A Post</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Title:
+                      <input type="text" placeholder="your email goes here" />
+                    </label>
+                    
+                  </div>
                 </div>
-                <div class="large-6 columns">
-                    <p><a href="#">Back to top</a></p>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Body:
+                      <textarea  placeholder="your thoughts..."></textarea>
+                    </label>
+                    
+                  </div>
                 </div>
-            </div>
-        </footer>
-        <script type="text/javascript" src="./bower_components/angularjs/angular.js"></script>
-        <script type="text/javascript" src="./bower_components/angular-route/angular-route.js"></script>
-        <script type="text/javascript" src="./bower_components/lodash/dist/lodash.js"></script>
-        <script type="text/javascript" src="./bower_components/restangular/dist/restangular.js"></script>
-        <script type="text/javascript" src="./bower_components/angular-local-storage/angular-local-storage.js"></script>
-        <script type="text/javascript" src="./js/main.js"></script>
-        <script type="text/javascript" src="./js/controllers/HomeDetailCtrl.js"></script>
-        <script type="text/javascript" src="./js/controllers/ApplicationCtrl.js"></script>
-        <script type="text/javascript" src="./js/controllers/SessionCreateCtrl.js"></script>
-        <script type="text/javascript" src="./js/controllers/SessionDestroyCtrl.js"></script>
-        <script type="text/javascript" src="./js/controllers/UserCreateCtrl.js"></script>
-        <script type="text/javascript" src="./js/controllers/PostCreateCtrl.js"></script>
-        <script type="text/javascript" src="./js/factories/Session.js"></script>
-        <script type="text/javascript" src="./js/factories/User.js"></script>
-        <script type="text/javascript" src="./js/factories/Post.js"></script>
-        <script type="text/javascript" src="./js/services/AuthService.js"></script>
-        <script type="text/javascript" src="./js/directives/match.js"></script>
-        <!-- links for foundation framework -->
-        <script src="js/vendor/jquery.js"></script>
-        <script src="js/foundation.min.js"></script>
-        <script>
-          $(document).foundation();
-        </script>
-    </body>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+    
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
 </html>
-
