@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.httpauth import HTTPBasicAuth
 from flask.ext.wtf import Form
@@ -87,3 +87,12 @@ class PostSerializer(Serializer):
 
     class Meta:
         fields = ("id", "title", "body", "user", "created_at")
+
+#Views
+@auth.verify_password
+def verify_password(email, password):
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return False
+    g.user = user
+    return check_password_hash(user.password, password)
