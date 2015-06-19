@@ -27,6 +27,17 @@ class TestCase(unittest.TestCase):
         password = u.password
         assert len(password) > 50
     
+    def test_index(self):
+        """initial test. ensure flask was set up correctly"""
+        tester = app.test_client(self)
+        response = tester.get('/api/v1/posts', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response.data),type('qwerty'))
+    
+    def test_database(self):
+        """initial test. ensure that the database exists"""
+        tester = os.path.exists("blog.sqlite")
+        self.assertEqual(tester, True)
 
 if __name__ == '__main__':
     unittest.main()
