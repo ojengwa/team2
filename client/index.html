@@ -1,0 +1,144 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogg</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+
+
+      <div class="row">
+        <div class="large-12 columns">
+          <div class="nav-bar right">
+            <a class='show-signup button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
+            <a class='show-signin button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
+            <a style="display:none" class='create-post button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+            <a style="display:none" class='logout-btn button radius tiny' href="#">Logout</a>
+          </div>
+          <h1>Blogg <small>This is my mini andela blog</small></h1>
+          <hr/>
+        </div>
+      </div>
+       
+     
+      <div class="row">
+        <div id="blog-entries" class="large-9 columns" role="content">
+                  
+        </div>
+      </div>
+     
+      <footer class="row">
+        <div class="large-12 columns">
+          <hr/>
+          <div class="row">
+            <div class="large-6 columns">
+              <p>Copyright no one at all. Go to town.</p>
+            </div>
+            <div class="large-6 columns">
+                <a class='show-signup button radius tiny' href="#" data-reveal-id="signupModal">Sign Up</a>
+                <a class='show-signin button radius tiny' href="#" data-reveal-id="signinModal">Sign In</a>
+                <a style="display:none" class='create-post button radius tiny' href="#" data-reveal-id="createModal">Create Post</a>
+                <a style="display:none" class='logout-btn button radius tiny' href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+        
+
+        <!-- Reveal Modal for signup form begin -->
+        <div id="signupModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form >
+                <h2>Sign Up</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Email:
+                      <input id="signup-email" type="text" placeholder="your email goes here" required />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label>Password:
+                      <input id="signup-pwd" type="password" placeholder="your password goes here" required />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input id="signup-btn" type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Reveal Modal for signin form begin -->
+        <div id="signinModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form >
+                <h2>Sign In</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Email:
+                      <input id="signin-email" type="text" placeholder="your email goes here" required />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label >Password:
+                      <input id="signin-pwd" type="password" placeholder="your password goes here" required />
+                    </label>
+                   
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input id="signin-btn" type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Reveal Modal for signin form begin -->
+        <div id="createModal" class="reveal-modal" data-reveal aria-labelledby="signUpTitle" aria-hidden="true" role="dialog">
+            <form>
+                <h2>Create A Post</h2>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label>Title:
+                      <input id="blog-entry-title" type="text" placeholder="your email goes here" />
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label>Body:
+                      <textarea id="blog-entry-text" placeholder="your thoughts..." rows="8"></textarea>
+                    </label>
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-6 columns">
+                    <input id="create-post-btn" type='submit' class='button' value='Submit' />
+                  </div>
+                </div>
+            </form>
+        </div>
+        
+        
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
