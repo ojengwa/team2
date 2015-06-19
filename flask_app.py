@@ -22,7 +22,13 @@ db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
 # flask-restful
 api = restful.Api(app)
-
+# Allow CORS
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
 
 # Declare Model blueprints used in creating users
 class User(db.Model):
@@ -146,14 +152,17 @@ class PostListView(restful.Resource):
         post = Post(form.title.data, form.body.data)
         db.session.add(post)
         db.session.commit()
-        return PostSerializer(post).data, 201
-
+        return PostSerializer(post).data, 201    
 
 class PostView(restful.Resource):
     def get(self, id):
         posts = Post.query.filter_by(id=id).first()
         return PostSerializer(posts).data
 
+    def put(self, id):
+    
+
+    def del    
 # Add resource to api
 api.add_resource(UserView, '/api/v1/users')
 api.add_resource(SessionView, '/api/v1/sessions')
