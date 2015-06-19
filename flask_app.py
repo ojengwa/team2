@@ -160,9 +160,15 @@ class PostView(restful.Resource):
         return PostSerializer(posts).data
 
     def put(self, id):
-    
+        post = Post.query.filter_by(id=id).first()
+        post.title = request.form['title']
+        post.body = request.form['body']
+        db.session.commit()
+    def delete(self, id):
+        post = Post.query.filter_by(id=id).first()
+        db.session.delete(post)
+        db.session.commit()
 
-    def del    
 # Add resource to api
 api.add_resource(UserView, '/api/v1/users')
 api.add_resource(SessionView, '/api/v1/sessions')
