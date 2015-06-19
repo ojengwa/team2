@@ -140,7 +140,6 @@ class PostListView(restful.Resource):
         posts = Post.query.all()
         return PostSerializer(posts, many=True).data
 
-    @auth.login_required
     def post(self):
         form = PostCreateForm()
         if not form.validate_on_submit():
