@@ -1,6 +1,50 @@
+import os
 import unittest
-from flask_app import app
-from coverage import coverage
+from flask_app import app, db, basedir, User
+#from coverage import coverage
+
+
+
+class TestCase(unittest.TestCase):
+    def setUp(self):
+        app.config['TESTING'] = True
+        app.config['WTF_CSRF_ENABLED'] = False
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
+        self.app = app.test_client()
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+    
+    def test_user_email(self):
+        ''' checks if user signed up with a valid email '''
+        u = User(email='johndoe@gmail.com', password='admin')
+        extension = u.email.split('@')[1]
+        assert extension == 'gmail.com'
+    
+    def test_user_password_length(self):
+        ''' checks if password is hashed '''
+        u = User(email='johndoe@gmail.com', password='admin')
+        password = u.password
+        assert len(password) > 10
+
+    def test_can_create_user(self):
+        ''' tests if a user can be created '''
+        u = User(email='john@example.com', password='password')
+        db.session.add(u)
+        db.session.commit()
+        assert u.name == 'john'
+    
+    
+    
+    
+    
+
+if __name__ == '__main__':
+    unittest.main()
+
+
 
 cov = coverage(branch=True, omit=['flask/*', 'tests.py'])
 cov.start()
