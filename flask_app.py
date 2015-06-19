@@ -13,6 +13,7 @@ from wtforms_alchemy import model_form_factory
 from wtforms import StringField
 from wtforms.validators import DataRequired
 
+
 app = Flask(__name__)
 basedir = os.path.dirname(os.path.abspath(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % os.path.join(basedir, 'blog.sqlite')
@@ -113,7 +114,7 @@ def verify_password(email, password):
 
 
 class UserView(restful.Resource):
-
+    ''' create users '''
     def post(self):
         form = UserCreateForm()
         if not form.validate_on_submit():
@@ -126,7 +127,7 @@ class UserView(restful.Resource):
 
 
 class SessionView(restful.Resource):
-
+    ''' logs in users '''
     def post(self):
         form = SessionCreateForm()
         if not form.validate_on_submit():
